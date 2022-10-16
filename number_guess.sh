@@ -13,3 +13,19 @@ do
 done
 echo "Guess the secret number between 1 and 1000:"
 read GUESS_NUM
+COUNT=1
+while [[ $NO_GUESS -ne $GUESS_NUM ]]
+do
+  (( COUNT++ ))
+  if ! [[ $GUESS_NUM =~ ^[1-9]+$ ]];then
+    echo "That is not an integer, guess again:"
+    read GUESS_NUM
+  elif [[ $GUESS_NUM > $NO_GUESS ]];then
+    echo "It's lower than that, guess again:"
+    read GUESS_NUM
+  elif [[ $GUESS_NUM < $NO_GUESS ]];then
+    echo "It's higher than that, guess again:"
+    read GUESS_NUM 
+  fi
+done
+echo "You guessed it in $COUNT tries. The secret number was $NO_GUESS. Nice job!"
