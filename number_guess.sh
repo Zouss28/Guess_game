@@ -17,7 +17,7 @@ COUNT=1
 while [[ $NO_GUESS -ne $GUESS_NUM ]]
 do
   (( COUNT++ ))
-  if ! [[ $GUESS_NUM =~ ^[1-9]+$ ]];then
+  if ! [[ $GUESS_NUM =~ ^[0-9]+$ ]];then
     echo "That is not an integer, guess again:"
     read GUESS_NUM
   elif [[ $GUESS_NUM > $NO_GUESS ]];then
@@ -29,3 +29,5 @@ do
   fi
 done
 echo "You guessed it in $COUNT tries. The secret number was $NO_GUESS. Nice job!"
+
+INSERT_VALUE=$($PSQL "INSERT INTO games_info(name,no_guess) VALUES('$USERNAME',$COUNT)")
